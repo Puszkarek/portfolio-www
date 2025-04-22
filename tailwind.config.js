@@ -7,25 +7,16 @@ module.exports = {
   theme: {
     colors: {
       transparent: "transparent",
-      black: "black",
-      white: "white",
-      "brown-100": "#faf2ef",
-      "purple-100": "#f2eaff",
-      "purple-500": "#ae7aff",
-      "purple-700": "#8b62cb",
-      "purple-300": "#eee3ff",
-      "green-300": "#98E9AD",
-      "green-700": "#66cb62",
-      "red-300": "#E99897",
-      "red-700": "#cb6262",
-      "yellow-300": "#FBE8A4",
-      "blue-300": "#a4dbfb",
-      "blue-700": "#62a7cb",
-      "grey-500": "#60646D",
-      "grey-100": "rgb(243, 244, 246)",
+      black: "#000000",
+      white: "#FFFFFF",
+      "blue-200": "#02007F",
+      "grey-100": "#C3C3C3",
+      "green-200": "#008282",
     },
     extend: {
-      fontFamily: {},
+      fontFamily: {
+        vt323: ["VT323", "monospace"],
+      },
 
       boxShadow: {
         "regular-sm": "rgb(0, 0, 0) 3px 3px 0px 0px",

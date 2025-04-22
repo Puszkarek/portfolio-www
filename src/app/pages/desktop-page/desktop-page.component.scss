@@ -1,0 +1,26 @@
+:host {
+  @apply w-full h-full;
+  @apply flex flex-col items-center justify-center w-full h-full;
+  @apply bg-green-200;
+
+  .desktop-grid {
+    @apply w-full h-full;
+    @apply grid gap-14 py-2 px-2;
+    grid-template-columns: repeat(auto-fill, 122px);
+    grid-template-rows: repeat(auto-fill, 110px);
+
+    .desktop-item {
+      @apply flex flex-col justify-end items-center gap-1 pb-1;
+      @apply text-white text-nowrap;
+
+      &:hover {
+        outline: 2px dashed white;
+      }
+
+      &.is-loading {
+        // TODO: Add custom loading button style
+        @apply cursor-wait;
+      }
+    }
+  }
+}

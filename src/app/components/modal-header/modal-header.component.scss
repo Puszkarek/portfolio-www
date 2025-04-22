@@ -1,0 +1,30 @@
+:host {
+  @apply w-full h-full;
+  @apply flex flex-row items-center justify-center gap-6;
+  @apply max-h-full max-w-[1920px] m-auto;
+  @apply text-white text-nowrap text-ellipsis;
+  @apply bg-blue-200;
+  @apply px-2 py-1;
+
+  .actions-container {
+    @apply flex flex-row justify-end items-center gap-2;
+    @apply w-full;
+
+    button {
+      @apply flex flex-col justify-center items-center;
+      @apply w-8 h-8;
+      @apply text-black bg-grey-100;
+      box-shadow:
+        inset -2px -2px 0 0 #262626,
+        inset 2px 2px 0 0 #f0f0f0,
+        inset -4px -4px 0 0 #7e7e7e,
+        inset 4px 4px 0 0 #b1b1b1;
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  :host {
+    @apply w-full;
+  }
+}

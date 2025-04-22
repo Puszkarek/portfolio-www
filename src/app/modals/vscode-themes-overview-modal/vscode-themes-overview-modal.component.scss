@@ -1,0 +1,11 @@
+:host {
+  @apply block w-[90%] h-full;
+  @apply flex flex-col items-center justify-center;
+  @apply max-h-full max-w-[700px] m-auto bg-white;
+}
+
+@media screen and (min-width: 1024px) {
+  :host {
+    @apply w-[700px];
+  }
+}

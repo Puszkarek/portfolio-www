@@ -1,0 +1,15 @@
+<app-page-container>
+  <div class="desktop-grid">
+    @for (item of items; track item.label) {
+      <button
+        (click)="item.action.run()"
+        class="desktop-item"
+        [class.is-loading]="item.action.isRunning()"
+        [style.grid-column]="item.position.x"
+        [style.grid-row]="item.position.y">
+        <img src="assets/desktop/{{ item.icon }}.svg" />
+        {{ item.label }}
+      </button>
+    }
+  </div>
+</app-page-container>
