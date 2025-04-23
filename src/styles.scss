@@ -1,3 +1,5 @@
+@use './styles/action.scss';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,4 +10,9 @@ html,
 body {
   @apply h-full w-full;
   @apply font-vt323 text-lg;
+}
+
+.modal-panel {
+  @apply max-w-full max-h-full w-auto h-auto;
+  @apply overflow-hidden;
 }

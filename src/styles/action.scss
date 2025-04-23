@@ -1,0 +1,30 @@
+.app-action-icon,
+.app-action-primary,
+.app-action-link {
+  @apply text-black;
+}
+
+.app-action-icon,
+.app-action-primary {
+  @apply bg-grey-100 shadow-external;
+
+  &:active {
+    @apply shadow-external-inverted;
+  }
+}
+
+.app-action-icon {
+  @apply flex flex-col justify-center items-center;
+  @apply w-8 h-8;
+}
+
+.app-action-primary {
+  @apply px-3 py-1;
+}
+
+.app-action-link {
+  @apply underline decoration-dashed underline-offset-2;
+  &:hover {
+    @apply text-blue-200;
+  }
+}

@@ -1,7 +1,68 @@
 :host {
-  @apply block w-[90%] h-full;
-  @apply flex flex-col items-center justify-center;
-  @apply max-h-full max-w-[700px] m-auto bg-white;
+  @apply block w-auto h-auto;
+  @apply max-h-full max-w-[700px] mx-2 my-2;
+}
+
+:host {
+  @apply py-[4px] pl-[4px] pr-[8px];
+  @apply bg-grey-100;
+  @apply shadow-external;
+}
+
+.section-header,
+.section-container {
+  @apply px-3;
+}
+
+.section-header {
+  @apply mb-8 pt-2;
+
+  .section-header-title {
+    @apply text-3xl;
+  }
+
+  .section-header-description {
+    @apply text-lg;
+  }
+}
+
+.section-container {
+  @apply flex flex-col gap-2;
+  @apply p-4 bg-white;
+  @apply shadow-internal;
+  @apply max-h-[500px] overflow-auto;
+}
+
+.theme-card {
+  .theme-header {
+    @apply p-4;
+    @apply outline-dashed outline-black;
+
+    .theme-name {
+      @apply text-2xl mb-1;
+    }
+
+    .theme-subtitle {
+      @apply italic p-0;
+    }
+  }
+
+  .theme-preview {
+    @apply block w-full;
+    @apply object-cover aspect-video;
+  }
+
+  .theme-description {
+    @apply px-1 py-4;
+  }
+
+  .actions-container {
+    @apply flex justify-center items-center gap-4;
+  }
+}
+
+.portfolio-note {
+  @apply py-4 text-sm text-center;
 }
 
 @media screen and (min-width: 1024px) {

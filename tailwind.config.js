@@ -17,24 +17,11 @@ module.exports = {
       fontFamily: {
         vt323: ["VT323", "monospace"],
       },
-
-      boxShadow: {
-        "regular-sm": "rgb(0, 0, 0) 3px 3px 0px 0px",
-        regular: "rgb(0, 0, 0) 5px 5px 0px 0px",
-        "regular-lg": "rgb(0, 0, 0) 10px 10px 0px 0px",
-      },
-      padding: {
-        m: "1rem",
-        lg: "2rem",
-      },
-      gap: {
-        m: "1rem",
-        lg: "2rem",
-      },
-      margin: {
-        m: "1rem",
-        lg: "2rem",
-      },
+    },
+    boxShadow: {
+      external: "inset -2px -2px 0 0 #262626, inset 2px 2px 0 0 #f0f0f0, inset -4px -4px 0 0 #7e7e7e, inset 4px 4px 0 0 #b1b1b1",
+      "external-inverted": "inset 2px 2px 0 0 #262626, inset -2px -2px 0 0 #f0f0f0, inset 4px 4px 0 0 #7e7e7e, inset -4px -4px 0 0 #b1b1b1",
+      internal: "inset -1px -1px 0 0 #ffffff, inset 1px 1px 0 0 #000000, inset -2px -2px 0 0 #b1b1b1, inset 2px 2px 0 0 #7e7e7e",
     },
   },
   plugins: [],

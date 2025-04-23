@@ -1,3 +1,36 @@
-<app-modal-header (maximize)="modalReference.close(null)" (close)="modalReference.close(null)">
-  VS Code Themes Overview
-</app-modal-header>
+<app-modal-header (close)="modalReference.close(null)"> VS Code Themes Overview </app-modal-header>
+<div class="section-header">
+  <h2 class="section-header-title">My VS Code Themes</h2>
+  <p class="section-header-description"
+    >I've created several themes for Visual Studio Code that enhance your coding experience with carefully crafted color
+    schemes.</p
+  >
+</div>
+
+<div class="section-container">
+  @for (theme of themes; track theme.name) {
+    <div class="theme-card">
+      <div class="theme-header">
+        <h3 class="theme-name">{{ theme.name }}</h3>
+        <p class="theme-subtitle">{{ theme.subtitle }}</p>
+      </div>
+
+      <img class="theme-preview" [src]="theme.image" [alt]="theme.name + ' preview'" />
+
+      <p class="theme-description">{{ theme.description }}</p>
+
+      <div class="actions-container">
+        <a appAction="link" [href]="theme.marketplace" target="_blank"> Source Code </a>
+        <a appAction="link" [href]="theme.marketplace" target="_blank"> Get in Marketplace </a>
+      </div>
+    </div>
+  }
+</div>
+
+<div class="portfolio-note">
+  <p
+    >These themes were created with love and attention to detail. Check them out if you want to refresh your coding
+    environment!</p
+  >
+  <p>All themes are licensed under the MIT license.</p>
+</div>
