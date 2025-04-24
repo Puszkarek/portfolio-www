@@ -27,10 +27,15 @@
 }
 
 .section-container {
-  @apply flex flex-col gap-2;
-  @apply p-4 bg-white;
+  @apply block bg-white;
+  @apply outline-black outline outline-1;
   @apply shadow-internal;
-  @apply max-h-[500px] overflow-auto;
+  @apply w-full h-full max-h-[500px] overflow-hidden;
+
+  .section-content {
+    @apply p-4 w-full h-full max-h-[500px] overflow-auto;
+    @apply flex flex-col gap-10;
+  }
 }
 
 .theme-card {
@@ -48,8 +53,9 @@
   }
 
   .theme-preview {
-    @apply block w-full;
-    @apply object-cover aspect-video;
+    @apply py-4;
+    @apply block w-full max-h-[300px] px-6;
+    @apply object-cover object-top;
   }
 
   .theme-description {

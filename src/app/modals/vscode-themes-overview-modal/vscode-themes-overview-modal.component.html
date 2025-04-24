@@ -7,25 +7,27 @@
   >
 </div>
 
-<div class="section-container">
-  @for (theme of themes; track theme.name) {
-    <div class="theme-card">
-      <div class="theme-header">
-        <h3 class="theme-name">{{ theme.name }}</h3>
-        <p class="theme-subtitle">{{ theme.subtitle }}</p>
+<app-scrollable-container class="section-container">
+  <app-scrollable-viewport class="section-content">
+    @for (theme of themes; track theme.name) {
+      <div class="theme-card">
+        <div class="theme-header">
+          <h3 class="theme-name">{{ theme.name }}</h3>
+          <p class="theme-subtitle">{{ theme.subtitle }}</p>
+        </div>
+
+        <p class="theme-description">{{ theme.description }}</p>
+
+        <div class="actions-container">
+          <a appAction="link" [href]="theme.links.github" target="_blank"> See on GitHub </a>
+          <a appAction="link" [href]="theme.links.marketplace" target="_blank"> Get in Marketplace </a>
+        </div>
+
+        <img class="theme-preview" [src]="theme.imageURL" [alt]="theme.name + ' preview'" />
       </div>
-
-      <img class="theme-preview" [src]="theme.image" [alt]="theme.name + ' preview'" />
-
-      <p class="theme-description">{{ theme.description }}</p>
-
-      <div class="actions-container">
-        <a appAction="link" [href]="theme.marketplace" target="_blank"> Source Code </a>
-        <a appAction="link" [href]="theme.marketplace" target="_blank"> Get in Marketplace </a>
-      </div>
-    </div>
-  }
-</div>
+    }
+  </app-scrollable-viewport>
+</app-scrollable-container>
 
 <div class="portfolio-note">
   <p

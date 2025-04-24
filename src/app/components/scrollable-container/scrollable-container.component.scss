@@ -1,0 +1,21 @@
+:host {
+  @apply relative pr-[16px];
+}
+
+.scroll-container {
+  @apply absolute top-0 right-0 h-full max-h-full;
+  @apply w-[16px];
+  @apply flex flex-col justify-stretch items-stretch;
+
+  .scroll-track {
+    @apply flex-1;
+    .scroll-thumb {
+      @apply w-full min-h-[32px];
+      @apply bg-grey-100 shadow-external;
+    }
+  }
+
+  .scroll-button {
+    @apply w-full h-[16px] text-[6px];
+  }
+}

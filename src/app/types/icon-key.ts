@@ -1,1 +1,1 @@
-export type IconKey = "close";
+export type IconKey = "close" | "arrow-up" | "arrow-down";

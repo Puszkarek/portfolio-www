@@ -21,7 +21,7 @@ module.exports = {
     boxShadow: {
       external: "inset -2px -2px 0 0 #262626, inset 2px 2px 0 0 #f0f0f0, inset -4px -4px 0 0 #7e7e7e, inset 4px 4px 0 0 #b1b1b1",
       "external-inverted": "inset 2px 2px 0 0 #262626, inset -2px -2px 0 0 #f0f0f0, inset 4px 4px 0 0 #7e7e7e, inset -4px -4px 0 0 #b1b1b1",
-      internal: "inset -1px -1px 0 0 #ffffff, inset 1px 1px 0 0 #000000, inset -2px -2px 0 0 #b1b1b1, inset 2px 2px 0 0 #7e7e7e",
+      internal: "inset -1px -1px 0 0 #ffffff, inset 1px 1px 0 0 #b1b1b1, inset -2px -2px 0 0 #7e7e7e, inset 2px 2px 0 0 #000000",
     },
   },
   plugins: [],

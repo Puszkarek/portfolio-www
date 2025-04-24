@@ -1,0 +1,12 @@
+<ng-content></ng-content>
+<div class="scroll-container">
+  <button (click)="scrollUp()" appAction="icon" class="scroll-button">
+    <app-icon icon="arrow-up" class="scroll-button-icon" />
+  </button>
+  <div class="scroll-track">
+    <div class="scroll-thumb"></div>
+  </div>
+  <button (click)="scrollDown()" appAction="icon" class="scroll-button">
+    <app-icon class="scroll-button-icon" icon="arrow-down" />
+  </button>
+</div>
