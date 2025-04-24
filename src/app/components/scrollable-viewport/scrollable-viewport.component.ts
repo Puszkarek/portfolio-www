@@ -3,8 +3,9 @@ import { ElementRef, inject, signal } from "@angular/core";
 import type { OnDestroy } from "@angular/core";
 
 export type ScrollPosition = {
-  scrollXPercent: number;
-  scrollYPercent: number;
+  clientHeight: number;
+  scrollHeight: number;
+  scrollTop: number;
 };
 
 @Component({
@@ -27,8 +28,9 @@ export class ScrollableViewportComponent implements OnDestroy {
   public readonly hostElement = inject<ElementRef<HTMLElement>>(ElementRef<HTMLElement>);
 
   private readonly _scrollPosition = signal<ScrollPosition>({
-    scrollYPercent: 0,
-    scrollXPercent: 0,
+    clientHeight: 0,
+    scrollHeight: 0,
+    scrollTop: 0,
   });
   public readonly scrollPosition = this._scrollPosition.asReadonly();
 
@@ -43,30 +45,12 @@ export class ScrollableViewportComponent implements OnDestroy {
   }
 
   private readonly _checkScrollPosition = (): void => {
-    const { scrollTop, scrollHeight, clientHeight, scrollLeft, scrollWidth, clientWidth } = this.hostElement.nativeElement;
-
-    const scrollXPercent = this._getScrollXPercent(scrollLeft, scrollWidth, clientWidth);
-    const scrollYPercent = this._getScrollYPercent(scrollTop, scrollHeight, clientHeight);
+    const { scrollTop, scrollHeight, clientHeight } = this.hostElement.nativeElement;
 
     this._scrollPosition.set({
-      scrollYPercent: Math.round(scrollYPercent),
-      scrollXPercent: Math.round(scrollXPercent),
+      clientHeight,
+      scrollHeight,
+      scrollTop,
     });
-  };
-
-  private readonly _getScrollYPercent = (scrollTop: number, scrollHeight: number, clientHeight: number): number => {
-    if (scrollTop === 0) {
-      return 0;
-    }
-
-    return Math.round((scrollTop / (scrollHeight - clientHeight)) * 100);
-  };
-
-  private readonly _getScrollXPercent = (scrollLeft: number, scrollWidth: number, clientWidth: number): number => {
-    if (scrollLeft === 0) {
-      return 0;
-    }
-
-    return Math.round((scrollLeft / (scrollWidth - clientWidth)) * 100);
   };
 }

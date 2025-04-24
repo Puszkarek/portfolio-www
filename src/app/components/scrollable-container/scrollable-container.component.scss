@@ -1,5 +1,19 @@
 :host {
   @apply relative pr-[16px];
+
+  // References to calculated variables
+  --viewport-height: 100%;
+  --content-height: unset;
+
+  // Size of the scrollbar
+  --track-height: unset;
+  --thumb-size: max(calc(var(--viewport-height) * var(--track-height) / var(--content-height)), 32);
+  --thumb-height: calc(var(--thumb-size) * 1px);
+
+  // Positioning animation
+  --scrollbar-y-thumb-transform-to-value: calc(calc(var(--track-height) - var(--thumb-size)) * 1px);
+  --scrollbar-thumb-transform-from: 0 0;
+  --scrollbar-thumb-transform-to: 0 var(--scrollbar-y-thumb-transform-to-value);
 }
 
 .scroll-container {
@@ -8,14 +22,36 @@
   @apply flex flex-col justify-stretch items-stretch;
 
   .scroll-track {
-    @apply flex-1;
+    @apply relative flex-1;
+    &::before {
+      @apply content-[''] absolute top-0 right-0 w-full h-full;
+      @apply bg-repeat opacity-25;
+      background-image: url('/assets/images/scroll-track.png');
+      background-size: 70%;
+    }
+
     .scroll-thumb {
-      @apply w-full min-h-[32px];
+      @apply absolute z-10;
+      @apply cursor-pointer;
       @apply bg-grey-100 shadow-external;
+      @apply h-[var(--thumb-height)];
+      @apply w-full min-w-full;
+      animation-name: scrollbarThumbAnimation;
+      animation-duration: 1ms; /* Firefox */
+      animation-timing-function: linear;
     }
   }
 
   .scroll-button {
     @apply w-full h-[16px] text-[6px];
+  }
+}
+
+@keyframes scrollbarThumbAnimation {
+  from {
+    translate: var(--scrollbar-thumb-transform-from);
+  }
+  to {
+    translate: var(--scrollbar-thumb-transform-to);
   }
 }

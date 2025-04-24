@@ -3,8 +3,8 @@
   <button (click)="scrollUp()" appAction="icon" class="scroll-button">
     <app-icon icon="arrow-up" class="scroll-button-icon" />
   </button>
-  <div class="scroll-track">
-    <div class="scroll-thumb"></div>
+  <div #scrollTrack class="scroll-track">
+    <div #scrollThumb class="scroll-thumb"></div>
   </div>
   <button (click)="scrollDown()" appAction="icon" class="scroll-button">
     <app-icon class="scroll-button-icon" icon="arrow-down" />
