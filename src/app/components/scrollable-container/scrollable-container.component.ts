@@ -1,7 +1,10 @@
-import { Component, contentChild, computed, inject, ElementRef, effect, afterRenderEffect, viewChild, HostBinding } from "@angular/core";
+import { Component, contentChild, computed, inject, ElementRef, effect, afterRenderEffect, viewChild, HostBinding, NgZone } from "@angular/core";
+import type { AfterViewInit } from "@angular/core";
 import { IconComponent } from "../icon/icon.component";
 import { ActionDirective } from "../../directives/action.directive";
 import { ScrollableViewportComponent } from "../scrollable-viewport/scrollable-viewport.component";
+import { filter, fromEvent, of, switchMap, takeUntil, tap } from "rxjs";
+import type { Observable } from "rxjs";
 
 declare global {
   class ScrollTimeline extends AnimationTimeline {
@@ -28,7 +31,9 @@ const startAnimation = (thumb: HTMLElement, viewport: HTMLElement): Animation =>
   templateUrl: "./scrollable-container.component.html",
   styleUrl: "./scrollable-container.component.scss",
 })
-export class ScrollableContainerComponent {
+export class ScrollableContainerComponent implements AfterViewInit {
+  private readonly _zone = inject(NgZone);
+
   @HostBinding("style.--track-height")
   public trackSize = 0;
 
@@ -38,7 +43,6 @@ export class ScrollableContainerComponent {
   @HostBinding("style.--content-height")
   public contentSize = 0;
 
-  private readonly _hostElement = inject<ElementRef<HTMLElement>>(ElementRef);
   public readonly viewport = contentChild(ScrollableViewportComponent);
   public readonly scrollThumb = viewChild("scrollThumb", { read: ElementRef });
   public readonly scrollTrack = viewChild("scrollTrack", { read: ElementRef });
@@ -55,7 +59,6 @@ export class ScrollableContainerComponent {
     afterRenderEffect(() => {
       const thumbElement = this.scrollThumb()?.nativeElement as HTMLElement;
       const viewportElement = this.viewport()?.hostElement.nativeElement;
-      console.log(thumbElement, viewportElement);
       if (!thumbElement || !viewportElement) return;
 
       startAnimation(thumbElement, viewportElement);
@@ -67,7 +70,6 @@ export class ScrollableContainerComponent {
       if (!viewport) return;
       const contentSize = viewport.scrollHeight;
 
-      console.log({ contentSize });
       this.contentSize = contentSize;
     });
 
@@ -76,7 +78,6 @@ export class ScrollableContainerComponent {
       const viewport = this.viewport()?.hostElement.nativeElement;
       if (!viewport) return;
       const viewportSize = viewport.offsetHeight;
-      console.log({ viewportSize });
       this.viewportSize = viewportSize;
     });
 
@@ -86,8 +87,66 @@ export class ScrollableContainerComponent {
       if (!scrollTrack) return;
 
       const trackSize = scrollTrack.offsetHeight;
-      console.log(trackSize);
       this.trackSize = trackSize;
     });
+  }
+
+  public ngAfterViewInit(): void {
+    this._zone.runOutsideAngular(() => {
+      console.log("ScrollableContainerComponent.afterViewInit");
+      this._listenPointerEvents().subscribe();
+    });
+  }
+
+  private _listenPointerEvents(): Observable<unknown> {
+    const thumbElement = this.scrollThumb()?.nativeElement as HTMLElement;
+    const trackElement = this.scrollTrack()?.nativeElement as HTMLElement;
+    const viewportElement = this.viewport()?.hostElement.nativeElement;
+
+    if (!thumbElement || !viewportElement || !trackElement) {
+      return of(null);
+    }
+
+    return fromEvent<PointerEvent>(thumbElement, "pointerdown").pipe(
+      switchMap((downEvent) => {
+        downEvent.preventDefault();
+        downEvent.stopImmediatePropagation();
+        const startY = downEvent.offsetY;
+        thumbElement.setPointerCapture(downEvent.pointerId);
+
+        // Create a subject that will complete when pointerup happens
+        const pointerUp$ = fromEvent<PointerEvent>(document, "pointerup").pipe(
+          tap((upEvent) => {
+            thumbElement.releasePointerCapture(upEvent.pointerId);
+          }),
+        );
+
+        // Return the pointermove stream that will complete on pointerup
+        return fromEvent<PointerEvent>(document, "pointermove").pipe(
+          tap((moveEvent) => {
+            moveEvent.preventDefault();
+            moveEvent.stopImmediatePropagation();
+
+            // Get track bounds
+            const trackRect = trackElement.getBoundingClientRect();
+
+            // Calculate position relative to track
+            const trackRelativePosition = moveEvent.clientY - trackRect.top;
+
+            // Calculate the ratio of the track position to the scroll range
+            const scrollableRange = viewportElement.scrollHeight - viewportElement.clientHeight;
+            const trackRange = trackRect.height - thumbElement.offsetHeight;
+
+            // Calculate percentage of track and apply to scrollable range
+            const scrollPercentage = Math.max(0, Math.min(1, (trackRelativePosition - startY) / trackRange));
+            const scrollPosition = scrollPercentage * scrollableRange;
+
+            // Update scroll position
+            viewportElement.scrollTop = scrollPosition;
+          }),
+          takeUntil(pointerUp$),
+        );
+      }),
+    );
   }
 }

@@ -7,7 +7,7 @@
 
   // Size of the scrollbar
   --track-height: unset;
-  --thumb-size: max(calc(var(--viewport-height) * var(--track-height) / var(--content-height)), 32);
+  --thumb-size: min(max(calc(var(--viewport-height) * var(--track-height) / var(--content-height)), 32), 200);
   --thumb-height: calc(var(--thumb-size) * 1px);
 
   // Positioning animation
