@@ -1,4 +1,4 @@
-<app-modal-header (close)="modalReference.close(null)"> Terminal Projects Overview </app-modal-header>
+<app-modal-header (close)="modalReference.close(null)"> Full-Stack Projects Overview </app-modal-header>
 <div class="section-header">
   <h2 class="section-header-title">My Full-Stack Projects</h2>
   <p class="section-header-description"> Here are some of my full-stack projects. </p>
@@ -6,9 +6,39 @@
 
 <app-scrollable-container class="section-container">
   <app-scrollable-viewport class="section-content">
-    <p class="pb-[200px] pt-[200px] text-center">Processing...</p>
+    @for (project of projects; track project.name) {
+      <div class="card-container">
+        <div class="card-header">
+          <h3 class="card-name">{{ project.name }}</h3>
+          <p class="card-subtitle">{{ project.subtitle }}</p>
+        </div>
 
-    <p class="italic text-grey-100 text-center">Just kidding, I'm still working on them.</p>
+        <p class="card-description">{{ project.description }}</p>
+
+        <h4 class="list-title">Features</h4>
+        <ul class="list-container">
+          @for (feature of project.features; track feature) {
+            <li class="list-item">{{ feature }}</li>
+          }
+        </ul>
+
+        <h4 class="list-title">Technologies</h4>
+        <ul class="list-container">
+          @for (technology of project.technologies; track technology) {
+            <li class="list-item">{{ technology }}</li>
+          }
+        </ul>
+
+        <div class="actions-container">
+          @if (project.links.github) {
+            <a appAction="link" [href]="project.links.github" target="_blank">View on GitHub</a>
+          }
+          @if (project.links.live) {
+            <a appAction="link" [href]="project.links.live" target="_blank">Live Demo</a>
+          }
+        </div>
+      </div>
+    }
   </app-scrollable-viewport>
 </app-scrollable-container>
 
