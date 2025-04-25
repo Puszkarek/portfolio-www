@@ -4,10 +4,12 @@
   @apply bg-green-200;
 
   .desktop-grid {
-    @apply w-full h-full;
-    @apply grid gap-14 py-2 px-2;
-    grid-template-columns: repeat(auto-fill, 122px);
-    grid-template-rows: repeat(auto-fill, 110px);
+    @apply w-full h-full max-h-[1080px];
+    @apply grid justify-center items-center content-center;
+    @apply gap-14 py-2 px-2;
+
+    grid-template-columns: repeat(auto-fill, 128px);
+    grid-template-rows: repeat(auto-fill, 128px);
 
     .desktop-item {
       @apply flex flex-col justify-end items-center gap-1 pb-1;

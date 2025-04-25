@@ -36,19 +36,27 @@ export default class DesktopPageComponent {
       icon: "computer",
       position: { x: 1, y: 2 },
       action: trackAction(async () => {
-        const component = await import("../../modals/vscode-themes-overview-modal/vscode-themes-overview-modal.component");
+        const component = await import("../../modals/full-stack-projects-modal/full-stack-projects-modal.component");
 
-        this._modalService.open(component.VSCodeThemesOverviewModalComponent);
+        this._modalService.open(component.FullStackProjectsModalComponent);
       }),
     },
     {
-      label: "Rust",
+      label: "Github",
+      icon: "network",
+      position: { x: -3, y: -2 },
+      action: trackAction(async () => {
+        window.open("https://github.com/Puszkarek", "_blank");
+      }),
+    },
+    {
+      label: "Small Projects",
       icon: "drive",
       position: { x: -2, y: -2 },
       action: trackAction(async () => {
-        const component = await import("../../modals/vscode-themes-overview-modal/vscode-themes-overview-modal.component");
+        const component = await import("../../modals/terminal-projects-modal/terminal-projects-modal.component");
 
-        this._modalService.open(component.VSCodeThemesOverviewModalComponent);
+        this._modalService.open(component.TerminalProjectsModalComponent);
       }),
     },
   ];
