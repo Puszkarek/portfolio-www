@@ -22,7 +22,7 @@ export default class DesktopPageComponent {
 
   public readonly items: ReadonlyArray<DesktopItem> = [
     {
-      label: "VS Code Themes",
+      label: "VSC Themes",
       icon: "folder",
       position: { x: 1, y: 1 },
       action: trackAction(async () => {
@@ -32,9 +32,19 @@ export default class DesktopPageComponent {
       }),
     },
     {
+      label: "VSC Extensions",
+      icon: "folder",
+      position: { x: 1, y: 2 },
+      action: trackAction(async () => {
+        const component = await import("../../modals/vscode-extensions-overview-modal/vscode-extensions-overview-modal.component");
+
+        this._modalService.open(component.VSCodeExtensionsOverviewModalComponent);
+      }),
+    },
+    {
       label: "Full-Stack",
       icon: "computer",
-      position: { x: 1, y: 2 },
+      position: { x: 1, y: -2 },
       action: trackAction(async () => {
         const component = await import("../../modals/full-stack-projects-modal/full-stack-projects-modal.component");
 

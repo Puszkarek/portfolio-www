@@ -1,0 +1,89 @@
+:host {
+  @apply block w-auto h-auto;
+  @apply max-h-full max-w-[700px] mx-2 my-2;
+}
+
+:host {
+  @apply py-[4px] pl-[4px] pr-[8px];
+  @apply bg-grey-100;
+  @apply shadow-external;
+}
+
+.section-header,
+.section-container {
+  @apply px-3;
+}
+
+.section-header {
+  @apply mb-8 pt-2;
+
+  .section-header-title {
+    @apply text-3xl;
+  }
+
+  .section-header-description {
+    @apply text-lg;
+  }
+}
+
+.section-container {
+  @apply block bg-white;
+  @apply outline-black outline outline-1;
+  @apply shadow-internal;
+  @apply w-full h-full max-h-[500px] overflow-hidden;
+
+  .section-content {
+    @apply p-4 w-full h-full max-h-[500px] overflow-auto;
+    @apply flex flex-col gap-10;
+  }
+}
+
+.extension-card {
+  .extension-header {
+    @apply p-4;
+    @apply outline-dashed outline-black;
+
+    .extension-name {
+      @apply text-2xl mb-1;
+    }
+
+    .extension-subtitle {
+      @apply italic p-0;
+    }
+  }
+
+  .extension-description {
+    @apply px-1 py-4;
+  }
+
+  .list-title {
+    @apply text-xl font-bold mt-2 mb-1;
+  }
+
+  .list-container {
+    @apply pl-5 mb-4;
+    .list-item {
+      @apply list-disc;
+      .command-name {
+        @apply font-bold;
+      }
+      .config-name {
+        @apply bg-grey-100 text-sm px-1 rounded;
+      }
+    }
+  }
+
+  .actions-container {
+    @apply flex justify-center items-center gap-4 mt-4;
+  }
+}
+
+.portfolio-note {
+  @apply py-4 text-sm text-center;
+}
+
+@media screen and (min-width: 1024px) {
+  :host {
+    @apply w-[700px];
+  }
+}

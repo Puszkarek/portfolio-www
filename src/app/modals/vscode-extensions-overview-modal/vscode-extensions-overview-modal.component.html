@@ -1,0 +1,67 @@
+<app-modal-header (close)="modalReference.close(null)"> VS Code Extensions </app-modal-header>
+<div class="section-header">
+  <h2 class="section-header-title">Productivity Tools</h2>
+  <p class="section-header-description">
+    A collection of useful extensions and tools designed to enhance your VS Code workflow.
+  </p>
+</div>
+
+<app-scrollable-container class="section-container">
+  <app-scrollable-viewport class="section-content">
+    @for (extension of extensions; track extension.name) {
+      <div class="extension-card">
+        <div class="extension-header">
+          <h3 class="extension-name">{{ extension.name }}</h3>
+          <p class="extension-subtitle">{{ extension.subtitle }}</p>
+        </div>
+
+        <p class="extension-description">{{ extension.description }}</p>
+
+        @if (extension.features.length > 0) {
+          <h4 class="list-title">Features</h4>
+          <ul class="list-container">
+            @for (feature of extension.features; track feature) {
+              <li class="list-item">{{ feature }}</li>
+            }
+          </ul>
+        }
+
+        @if (extension.commands && extension.commands.length > 0) {
+          <h4 class="list-title">Commands</h4>
+          <ul class="list-container">
+            @for (cmd of extension.commands; track cmd.name) {
+              <li class="list-item">
+                <span class="command-name">{{ cmd.name }}</span> – {{ cmd.description }}
+              </li>
+            }
+          </ul>
+        }
+
+        @if (extension.configuration && extension.configuration.length > 0) {
+          <h4 class="list-title">Configuration</h4>
+          <ul class="list-container">
+            @for (config of extension.configuration; track config.name) {
+              <li class="list-item">
+                <span class="config-name">{{ config.name }}</span> – {{ config.description }}
+              </li>
+            }
+          </ul>
+        }
+
+        <div class="actions-container">
+          @if (extension.links.github) {
+            <a appAction="link" [href]="extension.links.github" target="_blank"> View on GitHub </a>
+          }
+          @if (extension.links.marketplace) {
+            <a appAction="link" [href]="extension.links.marketplace" target="_blank"> Get in Marketplace </a>
+          }
+        </div>
+      </div>
+    }
+  </app-scrollable-viewport>
+</app-scrollable-container>
+
+<div class="portfolio-note">
+  <p>These extensions are designed to improve your developer experience.</p>
+  <p>All extensions are licensed under the MIT license.</p>
+</div>
