@@ -20,7 +20,7 @@
             "outputPath": "dist/portfolio",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": ["zone.js", "https://flackr.github.io/scroll-timeline/dist/scroll-timeline.js"],
+            "polyfills": ["zone.js", "public/scroll-timeline.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [

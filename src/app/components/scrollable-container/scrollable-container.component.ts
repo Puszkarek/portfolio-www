@@ -1,16 +1,11 @@
-import { Component, contentChild, computed, inject, ElementRef, effect, afterRenderEffect, viewChild, HostBinding, NgZone } from "@angular/core";
+import { isPlatformBrowser } from "@angular/common";
 import type { AfterViewInit } from "@angular/core";
-import { IconComponent } from "../icon/icon.component";
-import { ActionDirective } from "../../directives/action.directive";
-import { ScrollableViewportComponent } from "../scrollable-viewport/scrollable-viewport.component";
-import { filter, fromEvent, of, switchMap, takeUntil, tap } from "rxjs";
+import { Component, ElementRef, HostBinding, NgZone, PLATFORM_ID, afterRenderEffect, contentChild, effect, inject, viewChild } from "@angular/core";
 import type { Observable } from "rxjs";
-
-declare global {
-  class ScrollTimeline extends AnimationTimeline {
-    constructor(options: { source: HTMLElement; axis: "y" | "x" });
-  }
-}
+import { fromEvent, of, switchMap, takeUntil, tap } from "rxjs";
+import { ActionDirective } from "../../directives/action.directive";
+import { IconComponent } from "../icon/icon.component";
+import { ScrollableViewportComponent } from "../scrollable-viewport/scrollable-viewport.component";
 
 const startAnimation = (thumb: HTMLElement, viewport: HTMLElement): Animation => {
   return thumb.animate(
@@ -33,6 +28,7 @@ const startAnimation = (thumb: HTMLElement, viewport: HTMLElement): Animation =>
 })
 export class ScrollableContainerComponent implements AfterViewInit {
   private readonly _zone = inject(NgZone);
+  private readonly _platformId = inject(PLATFORM_ID);
 
   @HostBinding("style.--track-height")
   public trackSize = 0;
@@ -92,6 +88,8 @@ export class ScrollableContainerComponent implements AfterViewInit {
   }
 
   public ngAfterViewInit(): void {
+    if (!isPlatformBrowser(this._platformId)) return;
+
     this._zone.runOutsideAngular(() => {
       console.log("ScrollableContainerComponent.afterViewInit");
       this._listenPointerEvents().subscribe();
