@@ -10,6 +10,7 @@ html,
 body {
   @apply h-full w-full;
   @apply font-vt323 text-lg;
+  overscroll-behavior: none;
 }
 
 .modal-panel {

@@ -38,7 +38,7 @@ export class VSCodeExtensionsOverviewModalComponent {
       name: "Vanta.js",
       subtitle: "TypeScript playground that lives inside your editor",
       description:
-        "Vanta.js (from Vantablack) is a TypeScript playground that lives inside your editor. It stares back at you with realtime execution results. Unlike other playgrounds that require complex setup or external windows, Vanta runs right where you are. It supports your local environment, meaning your node_modules and tsconfig.json work out of the box.",
+        "Vanta.js is a TypeScript playground that lives inside your editor. It stares back at you with realtime execution results. Unlike other playgrounds that require complex setup or external windows, Vanta runs right where you are. It supports your local environment, meaning your node_modules and tsconfig.json work out of the box.",
       features: ["Realtime Execution: Code runs as you type (debounced)", "Inline Logs: console.log output appears directly next to your code", "Context Aware: Uses your workspace's node_modules and tsconfig.json", "Zero Config: Just run it"],
       commands: [
         {

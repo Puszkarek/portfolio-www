@@ -8,6 +8,7 @@ import { IconComponent } from "../icon/icon.component";
 import { ScrollableViewportComponent } from "../scrollable-viewport/scrollable-viewport.component";
 
 declare global {
+  // @ts-ignore
   class ScrollTimeline extends AnimationTimeline {
     constructor(options: { source: HTMLElement; axis: "y" | "x" });
   }
